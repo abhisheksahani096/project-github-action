@@ -56,3 +56,10 @@ jobs:
 
     - name: Trivy for Scan  
       run: trivy fs --format table --severity HIGH,CRITICAL --scanners vuln,secret,misconfig -o fs-report.txt . 
+
+    - name: Gitleaks installation 
+      run: sudo apt install gitleaks -y 
+  
+    - name: Gitleaks Scanning of code   
+      run: gitleaks detect source . -r gitleaks-report.json -f json 
+      
