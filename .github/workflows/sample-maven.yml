@@ -163,7 +163,7 @@ jobs:
     - name: Checkout Code 
       uses: actions/checkout@v4 
 
-    - name: Install AWS CLI (if not installed)
+    - name: Install AWS CLI
       run: |
        if command -v aws >/dev/null 2>&1; then
        echo "AWS CLI is already installed."
