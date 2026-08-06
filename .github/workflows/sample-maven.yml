@@ -181,11 +181,17 @@ jobs:
       with: 
         version: latest 
         
+    #- name: Configure kubeconfig 
+    #  run: | 
+    #   mkdir -p $HOME/.kube 
+    #   echo "${{ secrets.EKS_KUBECONFIG }}" > $HOME/.kube/config 
+
     - name: Configure kubeconfig 
       run: | 
-        mkdir -p $HOME/.kube 
-        echo "${{ secrets.EKS_KUBECONFIG }}" > $HOME/.kube/config 
-
+       aws eks update-kubeconfig \ 
+       --region ap-south-1 \ 
+       --name bankapp-cluster 
+    
     - name: Deploy to EKS 
       run: | 
         kubectl apply -f ds.yml 
